@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>俄罗斯方块</title>
+	<link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+	<h2>请使用方向键和空格键进行操作：上->旋转、左->左移、右->右移、下->下移、空格->坠落</h2>
+	<div class="square" id="local">
+		<div class="game" id="local_game"></div>
+		<div class="next" id="local_next"></div>
+		<p>已得分：<span id="local_score">0</span>分</p>
+		<p>已用时：<span id="local_time">0</span>秒</p>
+		<p id="local_gameover"></p>
+	</div>
+	<div class="square" id="remote">
+		<div class="game" id="remote_game"></div>
+		<div class="next" id="remote_next"></div>
+		<p>已得分：<span id="remote_score">0</span>分</p>
+		<p>已用时：<span id="remote_time">0</span>秒</p>
+		<p id="remote_gameover"></p>
+	</div>
+	<script src="js/square.js"></script>
+	<script src="js/squareFactory.js"></script>
+	<script src="js/game.js"></script>
+	<script src="js/local.js"></script>
+	<script src="js/remote.js"></script>
+	<script src="js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>琴弦文字</title>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		ul {
+			list-style: none;
+		}
+		#list {
+			margin: 50px auto;
+			width: 400px;
+		}
+		#list li {
+			position: relative;
+			height: 30px;
+			line-height: 30px;
+			border: 1px solid #000;
+		}
+		#list span {
+			width: 12px;
+			height: 12px;
+			font-size: 12px;
+			line-height: 12px;
+		}
+	</style>
+	<script src="move.js"></script>
+	<script type="text/javascript">
+		window.onload = function () {
+			var oList = document.getElementById('list');
+			var aLi = oList.children;
+			var iLiH = aLi[0].offsetHeight;
+
+			for(var i = 0; i < aLi.length; i++){
+
+				// 布局转换
+				var sLiHtml = aLi[i].innerHTML;
+				var sSpanHtml = '';
+
+				for(var j = 0; j < sLiHtml.length; j ++) {
+					sSpanHtml += '<span>' + sLiHtml[j] + '</span>';
+				}
+				aLi[i].innerHTML = sSpanHtml;
+
+				// 获取所有的span，转换成绝对定位布局
+				var aSpan = aLi[i].children;
+
+				for(var j = 0; j < aSpan.length; j++) {
+					aSpan[j].style.top  = aSpan[j].offsetTop + 'px';
+					aSpan[j].style.left = aSpan[j].offsetLeft + 'px';
+					aSpan[j].startTop = aSpan[j].offsetTop;
+				}
+				for(var j = 0; j < aSpan.length; j++) {
+					aSpan[j].style.position = 'absolute';
+					// span添加事件
+					(function (aSpan, num) {
+						var iStart = 0;
+						aSpan[num].onmouseover = function (ev) {
+							iStart = ev.clientY;
+						};
+						aSpan[num].onmousemove = function (ev) {
+							var iDis = ev.clientY - iStart;
+							var iDisB = iDis > 0 ? -1 : 1;
+							for(var j = 0; j < aSpan.length; j++) {
+								if(this.startTop + iDis >= 0 && this.startTop + iDis < iLiH - this.offsetHeight) {
+									var iTop = iDis + iDisB * Math.abs(num - j);
+									if(iDis > 0) {
+										if(iTop < 0) {
+											iTop = 0;
+										}
+									} else {
+										if(iTop > 0) {
+											iTop = 0;
+										}
+									}
+									aSpan[j].style.top = this.startTop + iTop + 'px';
+								}
+							}
+						};
+						aSpan[num].onmouseleave = function () {
+							for(var j = 0; j < aSpan.length; j++) {
+								animateTime(aSpan[j], {
+									top: this.startTop
+								}, 500,'elasticOut');
+								aSpan[j].style.top = this.startTop + 'px';
+							}
+						};
+					})(aSpan, j);
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<ul id="list">
+		<li>PHP是一个灵活的动态语言，支持多种编程技巧。1</li>
+		<li>PHP是一个灵活的动态语言，支持多种编程技巧。22</li>
+		<li>PHP是一个灵活的动态语言，支持多种编程技巧。333</li>
+		<li>PHP是一个灵活的动态语言，支持多种编程技巧。4444</li>
+	</ul>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>购物车页面</title>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+	<script src="js/cookie.js"></script>
+	<script src="js/shopcar.js"></script>
+</head>
+<body>
+	<h2 class="text-center">购物车页面</h2>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<form action="javascript:;" class="form-inline">
+					<table class="table table-bordered" id="shopcar">
+						<tr>
+							<th class="text-center">#</th>
+							<th class="text-center">商品名称</th>
+							<th class="text-center">商品价格</th>
+							<th class="text-center">商品商量</th>
+							<th class="text-center">累计</th>
+							<th class="text-center">操作</th>
+						</tr>
+					</table>
+				</form>
+				<input type="checkbox" checked id="totalChecked"> 全选 <a href="javascript:;" class="btn btn-danger" id="deleteChecked">删除</a>
+				<b class="pull-right">总计：￥<span id="totalPrice">0</span></b>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
